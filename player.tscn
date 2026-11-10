@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://c6o2wcg5culxe"]
+[gd_scene load_steps=17 format=3 uid="uid://c6o2wcg5culxe"]
 
 [ext_resource type="Texture2D" uid="uid://si6l4dvcnxhg" path="res://assets/sprites/personagem-principal.png" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bdjy1ou66lf0i" path="res://scripts/player.gd" id="1_i3pqv"]
 [ext_resource type="Texture2D" uid="uid://dpacbba76lelc" path="res://assets/sprites/personagem-esquerda.png" id="2_onrkg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
@@ -126,13 +127,20 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
 size = Vector2(10, 8)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["jogador"]]
+collision_mask = 14
+script = ExtResource("1_i3pqv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_dw050")
-animation = &"pulando_esquerda"
+frame_progress = 0.126381
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_b26j0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
