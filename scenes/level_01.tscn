@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://bkocyc1dbuadj"]
+[gd_scene load_steps=12 format=4 uid="uid://bkocyc1dbuadj"]
 
 [ext_resource type="Texture2D" uid="uid://bp8lxotot7ehd" path="res://assets/sprites/plataformas-sheet.png" id="1_4lj41"]
 [ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://player.tscn" id="2_mofoo"]
@@ -205,6 +205,8 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 13
 sources/0 = SubResource("TileSetAtlasSource_qgxqk")
 
+[sub_resource type="PackedScene" id="PackedScene_nr3cb"]
+
 [node name="Level01" type="Node2D"]
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -220,10 +222,17 @@ tile_map_data = PackedByteArray("AAACACsAAAAAAAAAAAACACwAAAAAAAEAAAADACsAAAAEAAA
 tile_set = SubResource("TileSet_t0ybu")
 
 [node name="Player" parent="." instance=ExtResource("2_mofoo")]
-position = Vector2(350, 177)
+z_index = 1
+position = Vector2(1152, 539)
 
-[node name="Door" parent="." instance=ExtResource("3_nr3cb")]
-position = Vector2(352, 206)
+[node name="Door" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("3_nr3cb")]
+position = Vector2(354, 204)
+personagem = NodePath("../Player")
+proxima_fase = SubResource("PackedScene_nr3cb")
 
-[node name="Key" parent="." instance=ExtResource("4_j60wy")]
-position = Vector2(1181, 227)
+[node name="Key" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("4_j60wy")]
+position = Vector2(1184, 241)
+personagem = NodePath("../Player")
+amplitude_flutuacao = 4.0
+ciclos_por_segundo = 1.0
+inclinacao_graus = 5.0
