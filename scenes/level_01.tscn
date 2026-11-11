@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=4 uid="uid://bkocyc1dbuadj"]
+[gd_scene load_steps=14 format=4 uid="uid://x280ylfaw3k7"]
 
 [ext_resource type="Texture2D" uid="uid://bp8lxotot7ehd" path="res://assets/sprites/plataformas-sheet.png" id="1_4lj41"]
 [ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://player.tscn" id="2_mofoo"]
 [ext_resource type="PackedScene" uid="uid://66v6nukhlaa" path="res://scenes/door.tscn" id="3_nr3cb"]
 [ext_resource type="PackedScene" uid="uid://cd4bvpc2fhxx3" path="res://scenes/key.tscn" id="4_j60wy"]
+[ext_resource type="PackedScene" uid="uid://bndime1fe6ars" path="res://scenes/levels/level_02.tscn" id="4_qgxqk"]
 [ext_resource type="PackedScene" uid="uid://cbl8p3qld07u2" path="res://scenes/enemy_01.tscn" id="5_j60wy"]
+[ext_resource type="PackedScene" uid="uid://tytrv6c0le7u" path="res://scenes/espinhos/espinho_fixo.tscn" id="7_t0ybu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nr3cb"]
 texture = ExtResource("1_4lj41")
@@ -252,8 +254,6 @@ physics_layer_0/collision_layer = 2
 physics_layer_0/collision_mask = 13
 sources/0 = SubResource("TileSetAtlasSource_qgxqk")
 
-[sub_resource type="PackedScene" id="PackedScene_nr3cb"]
-
 [node name="Level01" type="Node2D"]
 
 [node name="Background" type="TileMapLayer" parent="."]
@@ -275,7 +275,7 @@ position = Vector2(52, 691)
 [node name="Door" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("3_nr3cb")]
 position = Vector2(354, 204)
 personagem = NodePath("../Player")
-proxima_fase = SubResource("PackedScene_nr3cb")
+proxima_fase = ExtResource("4_qgxqk")
 
 [node name="Key" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("4_j60wy")]
 position = Vector2(1184, 241)
@@ -306,3 +306,6 @@ position = Vector2(1184, 240)
 alcance_patrulha = 20.0
 camadas_cenario = 15
 personagem = NodePath("../Player")
+
+[node name="EspinhoFixo" parent="." instance=ExtResource("7_t0ybu")]
+position = Vector2(180, 279)

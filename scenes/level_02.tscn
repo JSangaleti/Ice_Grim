@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://bndime1fe6ars"]
+[gd_scene load_steps=11 format=4 uid="uid://bdb2xhglfuhhb"]
 
 [ext_resource type="Texture2D" uid="uid://bp8lxotot7ehd" path="res://assets/sprites/plataformas-sheet.png" id="1_pmlnk"]
 [ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://player.tscn" id="2_cgbdd"]
+[ext_resource type="PackedScene" uid="uid://dejvyvmxivtf8" path="res://scenes/espinhos/espinho_pegadinha.tscn" id="3_m5641"]
+[ext_resource type="PackedScene" uid="uid://tytrv6c0le7u" path="res://scenes/espinhos/espinho_fixo.tscn" id="4_edq1u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m5641"]
 texture = ExtResource("1_pmlnk")
@@ -263,3 +265,9 @@ tile_set = SubResource("TileSet_cgbdd")
 
 [node name="Player" parent="." instance=ExtResource("2_cgbdd")]
 position = Vector2(42, 83)
+
+[node name="EspinhoPegadinha" parent="." instance=ExtResource("3_m5641")]
+position = Vector2(275, 655)
+
+[node name="EspinhoFixo" parent="." instance=ExtResource("4_edq1u")]
+position = Vector2(77, 655)
