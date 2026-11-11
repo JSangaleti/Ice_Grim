@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://cbl8p3qld07u2"]
+
+[ext_resource type="Texture2D" uid="uid://cnj1cx2n0g1st" path="res://assets/sprites/inimigo-verde.png" id="1_fci5n"]
+[ext_resource type="Script" uid="uid://ddvm8qli0e1ux" path="res://scripts/enemy_01.gd" id="1_kto0h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kto0h"]
+atlas = ExtResource("1_fci5n")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekgiw"]
+atlas = ExtResource("1_fci5n")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl44n"]
+atlas = ExtResource("1_fci5n")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m36a8"]
+atlas = ExtResource("1_fci5n")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtsts"]
+animations = [{
+"frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_kto0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekgiw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yl44n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m36a8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_syuvx"]
+radius = 3.0
+
+[node name="Enemy01" type="CharacterBody2D"]
+script = ExtResource("1_kto0h")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_rtsts")
+frame_progress = 0.347735
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_syuvx")
