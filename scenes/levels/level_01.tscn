@@ -1,10 +1,10 @@
 [gd_scene load_steps=13 format=4 uid="uid://bkocyc1dbuadj"]
 
 [ext_resource type="Texture2D" uid="uid://bp8lxotot7ehd" path="res://assets/sprites/plataformas-sheet.png" id="1_4lj41"]
-[ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://player.tscn" id="2_mofoo"]
+[ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://scenes/player.tscn" id="2_mofoo"]
 [ext_resource type="PackedScene" uid="uid://66v6nukhlaa" path="res://scenes/door.tscn" id="3_nr3cb"]
 [ext_resource type="PackedScene" uid="uid://cd4bvpc2fhxx3" path="res://scenes/key.tscn" id="4_j60wy"]
-[ext_resource type="PackedScene" uid="uid://bndime1fe6ars" path="res://scenes/level_02.tscn" id="4_qgxqk"]
+[ext_resource type="PackedScene" uid="uid://bndime1fe6ars" path="res://scenes/levels/level_02.tscn" id="4_qgxqk"]
 [ext_resource type="PackedScene" uid="uid://cbl8p3qld07u2" path="res://scenes/enemy_01.tscn" id="5_j60wy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nr3cb"]
