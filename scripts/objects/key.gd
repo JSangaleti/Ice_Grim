@@ -11,6 +11,9 @@ signal coletada
 @export var ciclos_por_segundo: float = 1.2
 @export var inclinacao_graus: float = 6.0
 
+@export_group("Efeitos sonoros")
+@export var som_coleta: AudioStream = preload("res://assets/sfx/key.mp3")
+
 var _foi_coletada: bool = false
 var _tempo: float = 0.0
 var _sprite: Sprite2D
@@ -66,5 +69,7 @@ func _ao_corpo_entrar(corpo: Node2D) -> void:
 	chaves[id_chave] = true
 	corpo.set_meta(&"chaves_coletadas", chaves)
 	hide()
+	if som_coleta != null:
+		AudioManager.play_sfx(som_coleta)
 	coletada.emit()
 	queue_free()

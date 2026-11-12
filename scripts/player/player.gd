@@ -9,6 +9,10 @@ extends CharacterBody2D
 @export var duracao_dash: float = 0.15
 @export var intervalo_dash: float = 0.35
 
+@export_group("Efeitos sonoros")
+@export var som_pulo: AudioStream = preload("res://assets/sfx/jump.mp3")
+@export var som_dash: AudioStream = preload("res://assets/sfx/dash.mp3")
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 var direcao: float = 1.0
@@ -46,6 +50,8 @@ func _physics_process(delta: float) -> void:
 		var pulou := Input.is_action_just_pressed(&"pular") and is_on_floor()
 		if pulou:
 			velocity.y = -forca_pulo
+			if som_pulo != null:
+				AudioManager.play_sfx(som_pulo)
 
 		if Input.is_action_just_pressed(&"dash") and _dash_disponivel and _recarga_dash <= 0.0:
 			_pedido_dash = true
@@ -72,6 +78,8 @@ func _iniciar_dash() -> void:
 	_direcao_dash = direcao
 	_tempo_dash = maxf(duracao_dash, 0.01)
 	_recarga_dash = maxf(intervalo_dash, 0.0)
+	if som_dash != null:
+		AudioManager.play_sfx(som_dash)
 
 
 func _atualizar_animacao(em_dash: bool, correndo: bool) -> void:

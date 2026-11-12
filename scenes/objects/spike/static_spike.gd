@@ -9,6 +9,9 @@ signal atingiu_personagem(corpo: Node2D)
 ## Desative para tratar vidas/game over pelo sinal atingiu_personagem.
 @export var reiniciar_fase_ao_tocar: bool = true
 
+@export_group("Efeitos sonoros")
+@export var som_morte: AudioStream = preload("res://assets/sfx/death.mp3")
+
 var _letal: bool = true
 var _contato_processado: bool = false
 
@@ -69,6 +72,8 @@ func _ao_encostar(corpo: Node2D) -> void:
 	_contato_processado = true
 	if reiniciar_fase_ao_tocar:
 		corpo.set_meta(&"ice_grim_reinicio_pendente", true)
+		if som_morte != null:
+			AudioManager.play_sfx(som_morte)
 	atingiu_personagem.emit(corpo)
 	if reiniciar_fase_ao_tocar:
 		_reiniciar_fase.call_deferred(corpo)
