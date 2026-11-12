@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://bndime1fe6ars"]
 
 [ext_resource type="Texture2D" uid="uid://bp8lxotot7ehd" path="res://assets/sprites/plataformas-sheet.png" id="1_pmlnk"]
-[ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://player.tscn" id="2_cgbdd"]
+[ext_resource type="PackedScene" uid="uid://c6o2wcg5culxe" path="res://scenes/player.tscn" id="2_cgbdd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m5641"]
 texture = ExtResource("1_pmlnk")
