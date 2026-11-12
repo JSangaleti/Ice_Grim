@@ -9,6 +9,9 @@ signal morreu_por_queda
 ## O marcador deve ficar fora do Player, para não acompanhar sua queda.
 @export var marcador_limite: Marker2D
 
+@export_group("Efeitos sonoros")
+@export var som_morte: AudioStream = preload("res://assets/sfx/death.mp3")
+
 @onready var _player: CharacterBody2D = get_parent() as CharacterBody2D
 
 var _morreu: bool = false
@@ -32,6 +35,8 @@ func _physics_process(_delta: float) -> void:
 		_player.set_meta(&"ice_grim_reinicio_pendente", true)
 		_player.velocity = Vector2.ZERO
 		_player.set_physics_process(false)
+		if som_morte != null:
+			AudioManager.play_sfx(som_morte)
 		morreu_por_queda.emit()
 		_reiniciar_fase.call_deferred()
 

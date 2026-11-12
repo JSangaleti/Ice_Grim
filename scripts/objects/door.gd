@@ -12,6 +12,10 @@ signal trancada
 # Se ficar vazio, a porta emite "aberta" sem trocar a cena.
 @export var proxima_fase: PackedScene
 
+@export_group("Efeitos sonoros")
+@export var som_trancada: AudioStream = preload("res://assets/sfx/locked.mp3")
+@export var som_abertura: AudioStream = preload("res://assets/sfx/finish.mp3")
+
 var _foi_aberta: bool = false
 
 
@@ -47,6 +51,8 @@ func _ao_corpo_entrar(corpo: Node2D) -> void:
 	if _foi_aberta or not _e_personagem(corpo):
 		return
 	if not _possui_chave(corpo):
+		if som_trancada != null:
+			AudioManager.play_sfx(som_trancada)
 		trancada.emit()
 		return
 	_tentar_abrir(corpo)
@@ -90,4 +96,6 @@ func _abrir(corpo: Node2D) -> void:
 	var imagem := get_node_or_null("Sprite2D") as Sprite2D
 	if imagem != null:
 		imagem.self_modulate = Color("a9ffd3")
+	if som_abertura != null:
+		AudioManager.play_sfx(som_abertura)
 	aberta.emit()

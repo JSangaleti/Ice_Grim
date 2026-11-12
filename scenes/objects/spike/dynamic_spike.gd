@@ -1,4 +1,4 @@
-extends "espinho.gd"
+extends "static_spike.gd"
 
 signal ativado
 
@@ -7,6 +7,9 @@ signal ativado
 ## Evita disparar só porque alguém passou muito acima ou abaixo do espinho.
 @export var alcance_vertical: float = 56.0
 @export var tempo_subida: float = 0.12
+
+@export_group("Efeitos sonoros")
+@export var som_ativacao: AudioStream = preload("res://assets/sfx/warning.mp3")
 
 var _disparado: bool = false
 var _tempo: float = 0.0
@@ -60,6 +63,8 @@ func _esta_perto(corpo: Node2D) -> bool:
 
 func _disparar() -> void:
 	_disparado = true
+	if som_ativacao != null:
+		AudioManager.play_sfx(som_ativacao)
 	ativado.emit()
 
 

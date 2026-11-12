@@ -19,6 +19,9 @@ signal atingiu_personagem(corpo: Node2D)
 @export var reiniciar_fase_ao_tocar: bool = true
 @export var animacao: StringName = &"default"
 
+@export_group("Efeitos sonoros")
+@export var som_morte: AudioStream = preload("res://assets/sfx/death.mp3")
+
 var _direcao: float = 1.0
 var _limite_esquerdo: float
 var _limite_direito: float
@@ -34,23 +37,29 @@ func _ready() -> void:
 	_limite_esquerdo = global_position.x - maxf(alcance_patrulha, 0.0)
 	_limite_direito = global_position.x + maxf(alcance_patrulha, 0.0)
 	floor_snap_length = 4.0
+
 	# A geleia ocupa a camada 3; chão e paredes são definidos acima.
 	set_deferred("collision_layer", 4)
 	set_deferred("collision_mask", camadas_cenario)
+
 	var colisao := get_node_or_null("CollisionShape2D") as CollisionShape2D
+
 	if colisao == null:
 		colisao = CollisionShape2D.new()
 		colisao.name = "CollisionShape2D"
 		add_child(colisao)
+
 	if colisao.shape == null:
 		var retangulo := RectangleShape2D.new()
 		retangulo.size = Vector2(24.0, 20.0)
 		colisao.position = Vector2(0.0, -10.0)
 		colisao.shape = retangulo
+
 	colisao.set_deferred("disabled", false)
 	_configurar_area_dano(colisao)
 	_sprite_animado = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
 	_sprite_simples = get_node_or_null("Sprite2D") as Sprite2D
+
 	if _sprite_animado != null and _sprite_animado.sprite_frames != null:
 		if _sprite_animado.sprite_frames.has_animation(animacao):
 			_sprite_animado.play(animacao)
@@ -59,26 +68,33 @@ func _ready() -> void:
 
 func _configurar_area_dano(colisao_corpo: CollisionShape2D) -> void:
 	var area := get_node_or_null("AreaDano") as Area2D
+
 	if area == null:
 		area = Area2D.new()
 		area.name = "AreaDano"
 		add_child(area)
+
 	area.set_deferred("collision_layer", 0)
 	area.set_deferred("collision_mask", 4294967295)
 	area.set_deferred("monitoring", true)
 	var forma := area.get_node_or_null("CollisionShape2D") as CollisionShape2D
+
 	if forma == null:
 		forma = CollisionShape2D.new()
 		forma.name = "CollisionShape2D"
 		area.add_child(forma)
+		
 	if forma.shape == null:
 		forma.shape = colisao_corpo.shape.duplicate() as Shape2D
 		forma.transform = colisao_corpo.transform
 		# Um pouco maior para detectar o toque antes de virar apoio sólido.
 		forma.scale *= 1.15
+
 	forma.set_deferred("disabled", false)
+	
 	if not area.body_entered.is_connected(_ao_encostar):
 		area.body_entered.connect(_ao_encostar)
+
 	if not area.body_exited.is_connected(_ao_afastar):
 		area.body_exited.connect(_ao_afastar)
 
@@ -130,11 +146,18 @@ func _e_personagem(corpo: Node2D) -> bool:
 func _ao_encostar(corpo: Node2D) -> void:
 	if _contato_processado or not _e_personagem(corpo):
 		return
+	# Compartilha a proteção com espinhos e queda para tocar a morte só uma vez.
+	if bool(corpo.get_meta(&"ice_grim_reinicio_pendente", false)):
+		return
 	_contato_processado = true
+	if reiniciar_fase_ao_tocar:
+		corpo.set_meta(&"ice_grim_reinicio_pendente", true)
+		if som_morte != null:
+			AudioManager.play_sfx(som_morte)
 	atingiu_personagem.emit(corpo)
 	if reiniciar_fase_ao_tocar:
 		set_physics_process(false)
-		_reiniciar_fase.call_deferred()
+		_reiniciar_fase.call_deferred(corpo)
 
 
 func _ao_afastar(corpo: Node2D) -> void:
@@ -142,9 +165,11 @@ func _ao_afastar(corpo: Node2D) -> void:
 		_contato_processado = false
 
 
-func _reiniciar_fase() -> void:
+func _reiniciar_fase(corpo: Node2D) -> void:
 	var erro := get_tree().reload_current_scene()
 	if erro != OK:
 		_contato_processado = false
+		if is_instance_valid(corpo):
+			corpo.remove_meta(&"ice_grim_reinicio_pendente")
 		set_physics_process(true)
 		push_error("Não foi possível reiniciar a fase. Execute uma cena salva. Código: %d" % erro)
