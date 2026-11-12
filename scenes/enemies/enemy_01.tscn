@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cbl8p3qld07u2"]
 
 [ext_resource type="Texture2D" uid="uid://cnj1cx2n0g1st" path="res://assets/sprites/inimigo-verde.png" id="1_fci5n"]
-[ext_resource type="Script" uid="uid://ddvm8qli0e1ux" path="res://scripts/enemy_01.gd" id="1_kto0h"]
+[ext_resource type="Script" uid="uid://ddvm8qli0e1ux" path="res://scripts/enemies/enemy_01.gd" id="1_kto0h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kto0h"]
 atlas = ExtResource("1_fci5n")
