@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdjsd0v5ksuql"]
+
+[ext_resource type="Script" uid="uid://cxhat31xww7ip" path="res://scripts/enemies/slime_02.gd" id="1_620jv"]
+[ext_resource type="Texture2D" uid="uid://gg4632u5rqgl" path="res://assets/sprites/inimigo-roxo.png" id="2_iu5vb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyc1t"]
+atlas = ExtResource("2_iu5vb")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfs35"]
+atlas = ExtResource("2_iu5vb")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_247p5"]
+atlas = ExtResource("2_iu5vb")
+region = Rect2(0, 16, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lw3bf"]
+atlas = ExtResource("2_iu5vb")
+region = Rect2(0, 24, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rtsts"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyc1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfs35")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_247p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lw3bf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_syuvx"]
+radius = 3.0
+
+[node name="Enemy01" type="CharacterBody2D"]
+script = ExtResource("1_620jv")
+velocidade = 100.0
+camadas_cenario = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_rtsts")
+frame_progress = 0.848226
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_syuvx")
