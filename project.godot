@@ -51,6 +51,13 @@ dash={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Jogador"
+2d_physics/layer_2="Plataformas"
+2d_physics/layer_3="Inimigos"
+2d_physics/layer_4="Objetos"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

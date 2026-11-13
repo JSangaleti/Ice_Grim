@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://tytrv6c0le7u"]
 
-[ext_resource type="Script" uid="uid://nb0sc04jpt7h" path="res://scenes/objects/spike/static_spike.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://d213qeebxdesc" path="res://scenes/objects/spike/spike.svg" id="2"]
+[ext_resource type="Script" uid="uid://nb0sc04jpt7h" path="res://scripts/objects/spike/static_spike.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d213qeebxdesc" path="res://assets/sprites/espinho.svg" id="2"]
 
 [sub_resource type="ConvexPolygonShape2D" id="Forma"]
 points = PackedVector2Array(-9, 9, 0, -9, 9, 9)
