@@ -4,9 +4,8 @@ signal aberta
 signal trancada
 
 @export var id_chave: StringName = &"principal"
+## Reconhece automaticamente os personagens deste grupo, sem vincular cada porta.
 @export var grupo_personagem: StringName = &"jogador"
-## Arraste o mesmo CharacterBody2D indicado na chave. Vazio: usa o grupo.
-@export var personagem: CharacterBody2D
 @export var consumir_chave: bool = true
 # Arraste a cena da próxima fase para este campo no Inspetor.
 # Se ficar vazio, a porta emite "aberta" sem trocar a cena.
@@ -59,8 +58,6 @@ func _ao_corpo_entrar(corpo: Node2D) -> void:
 
 
 func _e_personagem(corpo: Node2D) -> bool:
-	if is_instance_valid(personagem):
-		return corpo == personagem
 	return corpo is CharacterBody2D and corpo.is_in_group(grupo_personagem)
 
 

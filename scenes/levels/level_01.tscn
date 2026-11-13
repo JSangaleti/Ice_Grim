@@ -271,9 +271,8 @@ tile_set = SubResource("TileSet_t0ybu")
 z_index = 1
 position = Vector2(52, 691)
 
-[node name="Door" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("3_nr3cb")]
+[node name="Door" parent="." instance=ExtResource("3_nr3cb")]
 position = Vector2(354, 204)
-personagem = NodePath("../Player")
 proxima_fase = ExtResource("4_qgxqk")
 
 [node name="Key" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("4_j60wy")]

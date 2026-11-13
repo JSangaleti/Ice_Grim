@@ -287,10 +287,9 @@ position = Vector2(848, 432)
 [node name="Enemy11" parent="." instance=ExtResource("4_3acmf")]
 position = Vector2(960, 432)
 
-[node name="FakeDoor" parent="." node_paths=PackedStringArray("personagem") instance=ExtResource("5_yjjx0")]
+[node name="FakeDoor" parent="." instance=ExtResource("5_yjjx0")]
 position = Vector2(352, 736)
 collision_mask = 1
-personagem = NodePath("../Player")
 
 [node name="EspinhoPegadinha" parent="." instance=ExtResource("6_a3l5x")]
 position = Vector2(544, 424)
