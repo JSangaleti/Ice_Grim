@@ -1,9 +1,8 @@
 extends Area2D
+## Chave de engano: toca o som de coleta e desaparece sem liberar portas.
 
 signal coletada
 
-# Use o mesmo identificador na chave e na porta correspondente.
-@export var id_chave: StringName = &"principal"
 @export var grupo_personagem: StringName = &"jogador"
 ## Arraste o CharacterBody2D da fase. Vazio: usa o grupo jogador.
 @export var personagem: CharacterBody2D
@@ -22,9 +21,6 @@ var _rotacao_base: float = 0.0
 
 
 func _ready() -> void:
-	# Detecta corpos em qualquer camada; a identidade é filtrada abaixo.
-	set_deferred("collision_layer", 0)
-	set_deferred("collision_mask", 4294967295)
 	set_deferred("monitoring", true)
 	var colisao := get_node_or_null("CollisionShape2D") as CollisionShape2D
 	if colisao == null:
@@ -64,10 +60,6 @@ func _ao_corpo_entrar(corpo: Node2D) -> void:
 		return
 
 	_foi_coletada = true
-	# Guarda a posse no próprio personagem, sem alterar seu script de movimento.
-	var chaves: Dictionary = corpo.get_meta(&"chaves_coletadas", {})
-	chaves[id_chave] = true
-	corpo.set_meta(&"chaves_coletadas", chaves)
 	hide()
 	if som_coleta != null:
 		AudioManager.play_sfx(som_coleta)
