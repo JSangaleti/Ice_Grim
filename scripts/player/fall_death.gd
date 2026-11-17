@@ -42,7 +42,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _reiniciar_fase() -> void:
-	var erro := get_tree().reload_current_scene()
+	var erro := GerenciadorPartida.reiniciar_fase()
 	if erro != OK:
 		# Impede tentativas e mensagens de erro repetidas a cada quadro.
 		set_physics_process(false)

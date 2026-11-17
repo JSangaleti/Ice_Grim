@@ -166,7 +166,7 @@ func _ao_afastar(corpo: Node2D) -> void:
 
 
 func _reiniciar_fase(corpo: Node2D) -> void:
-	var erro := get_tree().reload_current_scene()
+	var erro := GerenciadorPartida.reiniciar_fase()
 	if erro != OK:
 		_contato_processado = false
 		if is_instance_valid(corpo):

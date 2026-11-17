@@ -17,6 +17,7 @@ config/icon="uid://cwgxswutgabgy"
 [autoload]
 
 AudioManager="*res://scripts/audio/audio_manager.gd"
+GerenciadorPartida="*res://scripts/game/gerenciador_partida.gd"
 
 [display]
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://c6o2wcg5culxe"]
+[gd_scene load_steps=19 format=3 uid="uid://c6o2wcg5culxe"]
 
 [ext_resource type="Script" uid="uid://bdjy1ou66lf0i" path="res://scripts/player/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://si6l4dvcnxhg" path="res://assets/sprites/personagem-principal.png" id="2_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://dpacbba76lelc" path="res://assets/sprites/personagem-esquerda.png" id="3_tuyoq"]
 [ext_resource type="Script" uid="uid://b7shx5f301vsx" path="res://scripts/player/fall_death.gd" id="4_fjrip"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
 atlas = ExtResource("2_qlg0r")
@@ -149,3 +150,5 @@ rotation_smoothing_enabled = true
 [node name="MortePorQueda" type="Node" parent="."]
 script = ExtResource("4_fjrip")
 limite_y = 1000.0
+
+[node name="HUD" parent="." instance=ExtResource("5_hud")]
