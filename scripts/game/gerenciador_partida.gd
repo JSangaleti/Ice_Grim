@@ -1,5 +1,4 @@
 extends Node
-## Mantém as tentativas entre reinícios e acompanha os objetivos da fase atual.
 
 signal dados_alterados
 signal tempo_alterado(segundos: int)
@@ -90,7 +89,6 @@ func reiniciar_fase() -> Error:
 
 
 func _ao_coletar_chave(identificador: int) -> void:
-	# Cada objeto conta uma vez, mesmo quando várias chaves usam o mesmo Id Chave.
 	if not _chaves_pendentes.has(identificador):
 		return
 	_chaves_pendentes.erase(identificador)
