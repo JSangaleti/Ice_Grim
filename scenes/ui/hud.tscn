@@ -1,0 +1,164 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhy173x355tbs"]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://assets/sprites/chave.png" id="2_chave"]
+[ext_resource type="Texture2D" path="res://assets/sprites/porta.png" id="3_porta"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hud"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 12.0
+
+[sub_resource type="Theme" id="Theme_hud"]
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 4
+
+[node name="Hud" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_hud")
+
+[node name="Layout" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = SubResource("Theme_hud")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Layout"]
+layout_mode = 0
+anchor_right = 1.0
+offset_left = 24.0
+offset_top = 20.0
+offset_right = -24.0
+offset_bottom = 112.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="PainelTentativas" type="PanelContainer" parent="Layout/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hud")
+
+[node name="Conteudo" type="VBoxContainer" parent="Layout/HBoxContainer/PainelTentativas"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Titulo" type="Label" parent="Layout/HBoxContainer/PainelTentativas/Conteudo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.76, 0.84, 1)
+theme_override_font_sizes/font_size = 14
+text = "TENTATIVAS"
+
+[node name="Tentativas" type="Label" parent="Layout/HBoxContainer/PainelTentativas/Conteudo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.98, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "1"
+
+[node name="PainelTempo" type="PanelContainer" parent="Layout/HBoxContainer"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hud")
+
+[node name="Conteudo" type="VBoxContainer" parent="Layout/HBoxContainer/PainelTempo"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="Titulo" type="Label" parent="Layout/HBoxContainer/PainelTempo/Conteudo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.76, 0.84, 1)
+theme_override_font_sizes/font_size = 14
+text = "TEMPO"
+
+[node name="Tempo" type="Label" parent="Layout/HBoxContainer/PainelTempo/Conteudo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.98, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "00:00"
+
+[node name="Espaco" type="Control" parent="Layout/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="PainelObjetivo" type="PanelContainer" parent="Layout/HBoxContainer"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hud")
+
+[node name="Conteudo" type="VBoxContainer" parent="Layout/HBoxContainer/PainelObjetivo"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 2
+
+[node name="ObjetivoTitulo" type="Label" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.76, 0.84, 1)
+theme_override_font_sizes/font_size = 14
+text = "CHAVES RESTANTES"
+
+[node name="ContadorChaves" type="HBoxContainer" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconeChave" type="TextureRect" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo/ContadorChaves"]
+custom_minimum_size = Vector2(24, 32)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_chave")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ChavesRestantes" type="Label" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo/ContadorChaves"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.93, 0.98, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "0"
+vertical_alignment = 1
+
+[node name="IndicadorSaida" type="HBoxContainer" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="SetaVermelha" type="Label" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo/IndicadorSaida"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.16, 0.22, 1)
+theme_override_font_sizes/font_size = 32
+text = "→"
+vertical_alignment = 1
+
+[node name="IconePorta" type="TextureRect" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo/IndicadorSaida"]
+custom_minimum_size = Vector2(28, 40)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_porta")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Instrucao" type="Label" parent="Layout/HBoxContainer/PainelObjetivo/Conteudo/IndicadorSaida"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.66, 1, 0.83, 1)
+theme_override_font_sizes/font_size = 20
+text = "Vá para a porta"
+vertical_alignment = 1

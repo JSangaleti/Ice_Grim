@@ -49,7 +49,7 @@ func _physics_process(_delta: float) -> void:
 func _ao_corpo_entrar(corpo: Node2D) -> void:
 	if _foi_aberta or not _e_personagem(corpo):
 		return
-	if not _possui_chave(corpo):
+	if not _pode_abrir(corpo):
 		if som_trancada != null:
 			AudioManager.play_sfx(som_trancada)
 		trancada.emit()
@@ -66,8 +66,15 @@ func _possui_chave(corpo: Node2D) -> bool:
 	return bool(chaves.get(id_chave, false))
 
 
+func _pode_abrir(corpo: Node2D) -> bool:
+	if not GerenciadorPartida.pode_sair():
+		return false
+	# Fases sem chaves já começam com a saída liberada.
+	return GerenciadorPartida.chaves_totais == 0 or _possui_chave(corpo)
+
+
 func _tentar_abrir(corpo: Node2D) -> void:
-	if _foi_aberta or not _e_personagem(corpo) or not _possui_chave(corpo):
+	if _foi_aberta or not _e_personagem(corpo) or not _pode_abrir(corpo):
 		return
 	_foi_aberta = true
 	# A troca de cena acontece fora da atualização das colisões.
@@ -75,7 +82,7 @@ func _tentar_abrir(corpo: Node2D) -> void:
 
 
 func _abrir(corpo: Node2D) -> void:
-	if not is_instance_valid(corpo) or not _possui_chave(corpo):
+	if not is_instance_valid(corpo) or not _pode_abrir(corpo):
 		_foi_aberta = false
 		return
 
@@ -86,6 +93,7 @@ func _abrir(corpo: Node2D) -> void:
 			push_error("Não foi possível abrir a próxima fase. Código: %d" % erro)
 			return
 
+	GerenciadorPartida.concluir_fase()
 	if consumir_chave:
 		var chaves: Dictionary = corpo.get_meta(&"chaves_coletadas", {})
 		chaves.erase(id_chave)
