@@ -13,7 +13,6 @@ func _ready() -> void:
 	GerenciadorPartida.tempo_alterado.connect(_atualizar_tempo)
 	_atualizar_contadores()
 	_atualizar_tempo(int(GerenciadorPartida.tempo_decorrido))
-	# Aguarda todas as chaves da fase entrarem na árvore antes de contá-las.
 	_iniciar_fase.call_deferred()
 
 
